@@ -5,7 +5,7 @@ export enum LogLevel {
   LOG,
   WARN,
   ERROR
-};
+}
 
 export default {
   log(level: LogLevel, ...msgs: Array<any>) {

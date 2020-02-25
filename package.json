@@ -7,7 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "tsc --noEmit && eslint -c .eslintrc.yml '*/**/*.{js,ts,tsx}'",
+    "lint": "tsc --noEmit && eslint -c .eslintrc.yml 'src/**/*.{js,ts,tsx}'",
     "deploy": "npm run build && ./scripts/deployLocal.sh",
     "deploy:prod": "npm run build && ./scripts/deployProd.sh",
     "eject": "react-scripts eject"
@@ -76,6 +76,7 @@
     "eslint-plugin-jest": "^23.8.0",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
+    "husky": "^4.2.3",
     "i18next": "^19.3.1",
     "node-sass": "^4.13.1",
     "redux-devtools-extension": "^2.13.8",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import { render } from '@testing-library/react';
 
 import Sidebar from './Sidebar';
@@ -20,7 +21,7 @@ describe('components/shared/sidebar', () => {
   it('should render', () => {
     expect(render(
       <BrowserRouter>
-        <Sidebar/>
+        <Sidebar history={createBrowserHistory()}/>
       </BrowserRouter>
     )).toBeDefined();
   });

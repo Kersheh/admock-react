@@ -17,7 +17,7 @@ const MEDIA_TYPE_VIEWS = map(CONSTANTS.MEDIA_TYPES);
 const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
 
 type SidebarProps = {
-  history: History
+  history: History;
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ history }: SidebarProps) => {

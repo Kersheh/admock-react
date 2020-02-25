@@ -23,7 +23,7 @@ import './App.scss';
 const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
 
 type BrowserTitleProps = {
-  history: History
+  history: History;
 };
 
 const BrowserTitle: React.FC<BrowserTitleProps> = ({ history }: BrowserTitleProps) => {
@@ -42,7 +42,9 @@ const BrowserTitle: React.FC<BrowserTitleProps> = ({ history }: BrowserTitleProp
 
   return (
     <Helmet>
-      <title>{`${t('APP_TITLE')} — ${t(MEDIA_TYPE_TRANSLATIONS[routePath.slice(1)])}`}</title>
+      <title>
+        {routePath ? `${t('APP_TITLE')} — ${t(MEDIA_TYPE_TRANSLATIONS[routePath.slice(1)])}` : t('APP_TITLE')}
+      </title>
     </Helmet>
   );
 };

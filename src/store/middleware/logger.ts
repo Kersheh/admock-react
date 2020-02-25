@@ -1,6 +1,6 @@
-import { Store, AnyAction } from 'redux';
+import { Store, AnyAction, Dispatch } from 'redux';
 
-const reduxLogger = (store: Store) => (next: any) => (action: AnyAction) => {
+const reduxLogger = (store: Store) => (next: Dispatch) => (action: AnyAction) => {
   console.group(action.type);
   console.info('dispatching', action);
 
