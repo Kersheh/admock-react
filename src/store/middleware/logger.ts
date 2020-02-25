@@ -1,6 +1,6 @@
 import { Store, AnyAction } from 'redux';
 
-const logger = (store: Store) => (next: any) => (action: AnyAction) => {
+const reduxLogger = (store: Store) => (next: any) => (action: AnyAction) => {
   console.group(action.type);
   console.info('dispatching', action);
 
@@ -10,4 +10,4 @@ const logger = (store: Store) => (next: any) => (action: AnyAction) => {
   return result;
 };
 
-export default logger;
+export default reduxLogger;

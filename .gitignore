@@ -8,6 +8,8 @@
 
 # production
 /build
+/dist
+/scripts/digital-ocean
 
 # misc
 .DS_Store

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { History, Location } from 'history';
 import { useTranslation } from 'react-i18next';
 import { map } from 'lodash';
 import { Button, Icon, Divider } from '@material-ui/core';
@@ -8,26 +8,20 @@ import classNames from 'classnames';
 
 import './Sidebar.scss';
 import CONSTANTS from 'src/constants/common';
+import TRANSLATION_MAP from 'src/constants/translationMap';
 import SocialMediaIcons from 'src/components/shared/SocialMediaIcons/SocialMediaIcons';
 import localStorageHelper from 'src/helpers/localStorage';
 // import { openClose, setCategory } from 'src/actions';
 
 const MEDIA_TYPE_VIEWS = map(CONSTANTS.MEDIA_TYPES);
-const MEDIA_TYPE_TRANSLATIONS = {
-  [CONSTANTS.MEDIA_TYPES.FACEBOOK]: 'MEDIA_TYPE_FACEBOOK',
-  [CONSTANTS.MEDIA_TYPES.INSTAGRAM]: 'MEDIA_TYPE_INSTAGRAM',
-  [CONSTANTS.MEDIA_TYPES.TWITTER]: 'MEDIA_TYPE_TWITTER',
-  [CONSTANTS.MEDIA_TYPES.GOOGLE_SEARCH]: 'MEDIA_TYPE_GOOGLE_SEARCH',
-  [CONSTANTS.MEDIA_TYPES.GOOGLE_DISPLAY]: 'MEDIA_TYPE_GOOGLE_DISPLAY',
-  [CONSTANTS.MEDIA_TYPES.PINTEREST]: 'MEDIA_TYPE_PINTEREST',
-  [CONSTANTS.MEDIA_TYPES.SNAPCHAT]: 'MEDIA_TYPE_SNAPCHAT',
-  [CONSTANTS.MEDIA_TYPES.LINKEDIN]: 'MEDIA_TYPE_LINKEDIN',
-  [CONSTANTS.MEDIA_TYPES.TIKTOK]: 'MEDIA_TYPE_TIKTOK'
+const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
+
+type SidebarProps = {
+  history: History
 };
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = ({ history }: SidebarProps) => {
   const { t } = useTranslation();
-  const history = useHistory();
 
   const [isCollapsed, setIsCollapsed] = useState(() => {
     return localStorageHelper.getLocalStorage('sidebar').isCollapsed || false;
@@ -35,14 +29,21 @@ const Sidebar: React.FC = () => {
 
   const [activeView, setActiveView] = useState(() => history.location.pathname.slice(1));
 
-  useEffect(() => {
-    localStorageHelper.setLocalStorage('sidebar', { isCollapsed });
-  }, [isCollapsed]);
-
   const navigate = (view: string) => {
     history.push(view);
-    setActiveView(view);
   };
+
+  const historyUnlisten = history.listen((location: Location) => {
+    setActiveView(location.pathname.slice(1));
+  });
+
+  useEffect(() => {
+    localStorageHelper.setLocalStorage('sidebar', { isCollapsed });
+
+    return () => {
+      historyUnlisten();
+    };
+  }, [isCollapsed, historyUnlisten]);
 
   // Examples to remove in favour of local management
   // const dispatch = useDispatch();

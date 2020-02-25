@@ -1,6 +1,10 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React, { Suspense, useState, useEffect } from 'react';
+import { createBrowserHistory, History, Location } from 'history';
+import { useTranslation } from 'react-i18next';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
+import TRANSLATION_MAP from 'src/constants/translationMap';
 import Spinner from 'src/components/shared/Spinner/Spinner';
 import Sidebar from 'src/components/shared/Sidebar/Sidebar';
 import Footer from 'src/components/shared/Footer/Footer';
@@ -16,14 +20,44 @@ import Tiktok from 'src/components/views/Tiktok/Tiktok';
 
 import './App.scss';
 
-// TODO: Wrap routed components in new FormPanel HOC
+const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
 
+type BrowserTitleProps = {
+  history: History
+};
+
+const BrowserTitle: React.FC<BrowserTitleProps> = ({ history }: BrowserTitleProps) => {
+  const { t } = useTranslation();
+  const [routePath, setRoutePath] = useState(history.location.pathname);
+
+  const historyUnlisten = history.listen((location: Location) => {
+    setRoutePath(location.pathname);
+  });
+
+  useEffect(() => {
+    return () => {
+      historyUnlisten();
+    };
+  }, [historyUnlisten]);
+
+  return (
+    <Helmet>
+      <title>{`${t('APP_TITLE')} — ${t(MEDIA_TYPE_TRANSLATIONS[routePath.slice(1)])}`}</title>
+    </Helmet>
+  );
+};
+
+// TODO: Wrap routed components in new FormPanel HOC
 const App: React.FC = () => {
+  const history = createBrowserHistory();
+
   return (
     <div className="app">
       <Suspense fallback={<Spinner size={128}/>}>
-        <BrowserRouter>
-          <Sidebar/>
+        <BrowserTitle history={history}/>
+
+        <Router history={history}>
+          <Sidebar history={history}/>
 
           <Switch>
             <Route exact path="/facebook" component={Facebook}/>
@@ -39,7 +73,7 @@ const App: React.FC = () => {
           </Switch>
 
           <Footer/>
-        </BrowserRouter>
+        </Router>
       </Suspense>
     </div>
   );

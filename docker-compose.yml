@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  webapp:
+    build: .
+    image: admock-react:latest
+    ports:
+      - 8080:80
+      - 4433:443
