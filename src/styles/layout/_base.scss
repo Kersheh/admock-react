@@ -1,0 +1,93 @@
+@import 'src/styles/abstract/colors';
+
+html {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+
+  body {
+    height: 100%;
+    min-height: 100%;
+    background-color: $color-white;
+    color: $color-cape-cod;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+
+    #root { // sass-lint:disable-line no-ids
+      height: 100%;
+      width: 100%;
+    }
+
+    [hidden] {
+      display: none !important; // sass-lint:disable-line no-important
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 500;
+      letter-spacing: -1px;
+      color: $color-cape-cod;
+      margin: 8px 0;
+
+      &.alt {
+        color: $color-white;
+      }
+    }
+
+    h1 {
+      font-size: 2.3em;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+
+    h3 {
+      font-size: 1.7em;
+    }
+
+    h4 {
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    a,
+    button {
+      cursor: pointer;
+      min-width: 24px;
+    }
+
+    a {
+      color: $color-danube-blue;
+      text-decoration: none;
+      font-weight: 700;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+
+    .bold {
+      font-weight: 700;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    // .hide-outline {
+    //   a,
+    //   button,
+    //   input {
+    //     &:focus {
+    //       outline: none;
+    //     }
+    //   }
+    // }
+  }
+}

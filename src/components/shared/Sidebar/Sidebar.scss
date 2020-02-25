@@ -1,0 +1,177 @@
+@import 'src/styles/abstract/colors';
+@import 'src/styles/abstract/mixins';
+
+@mixin collapse-width($width, $width-c: 0) {
+  @include cubic-transition(width);
+  overflow: hidden;
+  width: $width;
+
+  &--collapsed {
+    @include cubic-transition(width);
+    width: $width-c;
+  }
+}
+
+.sidebar {
+  @include collapse-width(200px, 55px);
+  height: 100%;
+  background: $color-danube-blue;
+  color: $color-white;
+  border-right: 2px solid rgba($color-kilamanjaro-gray, .1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  place-content: stretch space-between;
+  align-items: stretch;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 18px;
+
+    &--scroll-overflow {
+      overflow-x: hidden;
+    }
+  }
+
+  &-logo {
+    @include disable-select;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    place-content: stretch space-between;
+    align-items: stretch;
+    color: $color-white;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    padding-top: 18px;
+
+    &__text {
+      @include collapse-width(100%);
+      line-height: 36px;
+    }
+
+    &__desc {
+      @include collapse-width(100%);
+      @include disable-select;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+
+      button {
+        padding: 0;
+        min-width: 24px;
+        width: 24px;
+        height: 24px;
+        border-radius: 0;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+      .material-icons {
+        color: $color-white;
+        background: none;
+        height: 24px;
+        width: 24px;
+        font-size: 24px;
+      }
+    }
+  }
+
+  &-options {
+    margin-top: 36px;
+
+    &__option {
+      position: relative;
+      left: -6px;
+      width: 188px;
+      padding-bottom: 8px;
+
+      &-btn {
+        width: 100%;
+        min-width: 42px;
+
+        .MuiButton-root {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          color: $color-white;
+          border-radius: 0;
+        }
+
+        &.active {
+          background-color: rgba($color-white, .1);
+        }
+      }
+
+      &-text {
+        margin-left: 23px;
+        font-weight: 500;
+        text-transform: none;
+      }
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &-divider {
+    margin: 0 5% 4px;
+    width: 90%;
+
+    .MuiDivider-root {
+      background-color: rgba($color-white, .2);
+    }
+  }
+
+  .collapse-btn {
+    margin-right: 5px;
+
+    button {
+      padding: 0;
+      min-width: 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 0;
+    }
+
+    .MuiTouchRipple-child {
+      border-radius: 0;
+    }
+
+    .MuiButton-root {
+      color: rgba($color-black, .3);
+    }
+
+    .material-icons {
+      @include cubic-transition(transform);
+      transform: rotateY(0deg);
+      color: $color-white;
+      height: 42px;
+      width: 42px;
+      font-size: 42px;
+    }
+
+    &--collapsed {
+      .material-icons {
+        @include cubic-transition(transform);
+        transform: rotateY(180deg);
+      }
+    }
+  }
+}
