@@ -4,14 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { map } from 'lodash';
 import { Button, Icon, Divider } from '@material-ui/core';
 import classNames from 'classnames';
-// import { useDispatch, useSelector } from 'react-redux'
 
 import './Sidebar.scss';
 import CONSTANTS from 'src/constants/common';
 import TRANSLATION_MAP from 'src/constants/translationMap';
 import SocialMediaIcons from 'src/components/shared/SocialMediaIcons/SocialMediaIcons';
 import localStorageHelper from 'src/helpers/localStorage';
-// import { openClose, setCategory } from 'src/actions';
 
 const MEDIA_TYPE_VIEWS = map(CONSTANTS.MEDIA_TYPES);
 const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
@@ -44,15 +42,6 @@ const Sidebar: React.FC<SidebarProps> = ({ history }: SidebarProps) => {
       historyUnlisten();
     };
   }, [isCollapsed, historyUnlisten]);
-
-  // Examples to remove in favour of local management
-  // const dispatch = useDispatch();
-  // const isCollapsed = useSelector((state: any) => state.sidebar.isCollapsed);
-  // const category = useSelector((state: any) => state.sidebar.category);
-  // useEffect(() => console.log(isCollapsed, category));
-  //
-  // i.e.
-  // <div onClick={() => dispatch(openClose())}></div>
 
   const wrapperClassNames = classNames(
     'sidebar',

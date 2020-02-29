@@ -1,55 +1,98 @@
-import React, { Suspense, useState, useEffect } from 'react';
-import { createBrowserHistory, History, Location } from 'history';
-import { useTranslation } from 'react-i18next';
+import React, { Suspense } from 'react';
+import { createBrowserHistory } from 'history';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
-import TRANSLATION_MAP from 'src/constants/translationMap';
+import FormPanel from 'src/components/shared/FormPanel/FormPanel';
+import AdPreview from 'src/components/shared/AdPreview/AdPreview';
 import Spinner from 'src/components/shared/Spinner/Spinner';
 import Sidebar from 'src/components/shared/Sidebar/Sidebar';
 import Footer from 'src/components/shared/Footer/Footer';
-import Facebook from 'src/components/views/Facebook/Facebook';
-import Instagram from 'src/components/views/Instagram/Instagram';
-import Twitter from 'src/components/views/Twitter/Twitter';
-import GoogleSearch from 'src/components/views/GoogleSearch/GoogleSearch';
-import GoogleDisplay from 'src/components/views/GoogleDisplay/GoogleDisplay';
-import Pinterest from 'src/components/views/Pinterest/Pinterest';
-import Snapchat from 'src/components/views/Snapchat/Snapchat';
-import Linkedin from 'src/components/views/Linkedin/Linkedin';
-import Tiktok from 'src/components/views/Tiktok/Tiktok';
+import BrowserTitle from 'src/components/shared/BrowserTitle/BrowserTitle';
+
+import Facebook from 'src/components/views/forms/Facebook/Facebook';
+import Instagram from 'src/components/views/forms/Instagram/Instagram';
+import Twitter from 'src/components/views/forms/Twitter/Twitter';
+import GoogleSearch from 'src/components/views/forms/GoogleSearch/GoogleSearch';
+import GoogleDisplay from 'src/components/views/forms/GoogleDisplay/GoogleDisplay';
+import Pinterest from 'src/components/views/forms/Pinterest/Pinterest';
+import Snapchat from 'src/components/views/forms/Snapchat/Snapchat';
+import Linkedin from 'src/components/views/forms/Linkedin/Linkedin';
+import Tiktok from 'src/components/views/forms/Tiktok/Tiktok';
+
+import FacebookPreview from 'src/components/views/previews/FacebookPreview/FacebookPreview';
+import InstagramPreview from 'src/components/views/previews/InstagramPreview/InstagramPreview';
+import TwitterPreview from 'src/components/views/previews/TwitterPreview/TwitterPreview';
+import GoogleSearchPreview from 'src/components/views/previews/GoogleSearchPreview/GoogleSearchPreview';
+import GoogleDisplayPreview from 'src/components/views/previews/GoogleDisplayPreview/GoogleDisplayPreview';
+import PinterestPreview from 'src/components/views/previews/PinterestPreview/PinterestPreview';
+import SnapchatPreview from 'src/components/views/previews/SnapchatPreview/SnapchatPreview';
+import LinkedinPreview from 'src/components/views/previews/LinkedinPreview/LinkedinPreview';
+import TiktokPreview from 'src/components/views/previews/TiktokPreview/TiktokPreview';
 
 import './App.scss';
 
-const MEDIA_TYPE_TRANSLATIONS = TRANSLATION_MAP.MEDIA_TYPE_TRANSLATIONS;
+const routerViews = [
+  {
+    view: <Facebook/>,
+    preview: <FacebookPreview/>,
+    path: '/facebook'
+  },
+  {
+    view: <Instagram/>,
+    preview: <InstagramPreview/>,
+    path: '/instagram'
+  },
+  {
+    view: <Twitter/>,
+    preview: <TwitterPreview/>,
+    path: '/twitter'
+  },
+  {
+    view: <GoogleSearch/>,
+    preview: <GoogleSearchPreview/>,
+    path: '/google-search'
+  },
+  {
+    view: <GoogleDisplay/>,
+    preview: <GoogleDisplayPreview/>,
+    path: '/google-display'
+  },
+  {
+    view: <Pinterest/>,
+    preview: <PinterestPreview/>,
+    path: '/pinterest'
+  },
+  {
+    view: <Snapchat/>,
+    preview: <SnapchatPreview/>,
+    path: '/snapchat'
+  },
+  {
+    view: <Linkedin/>,
+    preview: <LinkedinPreview/>,
+    path: '/linkedin'
+  },
+  {
+    view: <Tiktok/>,
+    preview: <TiktokPreview/>,
+    path: '/tiktok'
+  },
+];
 
-type BrowserTitleProps = {
-  history: History;
-};
-
-const BrowserTitle: React.FC<BrowserTitleProps> = ({ history }: BrowserTitleProps) => {
-  const { t } = useTranslation();
-  const [routePath, setRoutePath] = useState(history.location.pathname);
-
-  const historyUnlisten = history.listen((location: Location) => {
-    setRoutePath(location.pathname);
-  });
-
-  useEffect(() => {
-    return () => {
-      historyUnlisten();
-    };
-  }, [historyUnlisten]);
-
+const routerViewComponents = routerViews.map((route, key) => {
   return (
-    <Helmet>
-      <title>
-        {routePath ? `${t('APP_TITLE')} — ${t(MEDIA_TYPE_TRANSLATIONS[routePath.slice(1)])}` : t('APP_TITLE')}
-      </title>
-    </Helmet>
-  );
-};
+    <Route exact path={route.path} key={key}>
+      <FormPanel>
+        {route.view}
+      </FormPanel>
 
-// TODO: Wrap routed components in new FormPanel HOC
+      <AdPreview>
+        {route.preview}
+      </AdPreview>
+    </Route>
+  );
+});
+
 const App: React.FC = () => {
   const history = createBrowserHistory();
 
@@ -62,15 +105,8 @@ const App: React.FC = () => {
           <Sidebar history={history}/>
 
           <Switch>
-            <Route exact path="/facebook" component={Facebook}/>
-            <Route exact path="/instagram" component={Instagram}/>
-            <Route exact path="/twitter" component={Twitter}/>
-            <Route exact path="/google-search" component={GoogleSearch}/>
-            <Route exact path="/google-display" component={GoogleDisplay}/>
-            <Route exact path="/pinterest" component={Pinterest}/>
-            <Route exact path="/snapchat" component={Snapchat}/>
-            <Route exact path="/linkedin" component={Linkedin}/>
-            <Route exact path="/tiktok" component={Tiktok}/>
+            {routerViewComponents}
+
             <Redirect from="*" to="/facebook"/>
           </Switch>
 
