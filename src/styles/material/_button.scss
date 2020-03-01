@@ -1,0 +1,17 @@
+.MuiToggleButtonGroup-root {
+  .MuiToggleButton-root {
+    border-radius: 0;
+  }
+}
+
+.MuiTouchRipple-ripple {
+  width: 100% !important; // sass-lint:disable-line no-important
+  height: 100% !important; // sass-lint:disable-line no-important
+  top: 0 !important; // sass-lint:disable-line no-important
+  left: 0 !important; // sass-lint:disable-line no-important
+
+  .MuiTouchRipple-child {
+    animation: none;
+    border-radius: 0;
+  }
+}

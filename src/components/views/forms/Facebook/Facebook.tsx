@@ -5,6 +5,23 @@ import { useTranslation } from 'react-i18next';
 
 import './Facebook.scss';
 
+export const FACEBOOK_CALL_TO_ACTION_OPTS = [
+  { value: 'apply', translate: 'FACEBOOK_CTA_BTN_APPLY_NOW' },
+  { value: 'book', translate: 'FACEBOOK_CTA_BTN_BOOK_NOW' },
+  { value: 'contact', translate: 'FACEBOOK_CTA_BTN_CONTACT_US' },
+  { value: 'donate', translate: 'FACEBOOK_CTA_BTN_DONATE_NOW' },
+  { value: 'download', translate: 'FACEBOOK_CTA_BTN_DOWNLOAD' },
+  { value: 'learn', translate: 'FACEBOOK_CTA_BTN_LEARN_MORE' },
+  { value: 'shop', translate: 'FACEBOOK_CTA_BTN_SHOP_NOW' },
+  { value: 'signup', translate: 'FACEBOOK_CTA_BTN_SIGN_UP' },
+  { value: 'watch', translate: 'FACEBOOK_CTA_BTN_WATCH_MORE' }
+];
+
+const PAGE_NAME_MAX_LEN = 30;
+const LINK_URL_MAX_LEN = 30;
+const LINK_DESC_MAX_LEN = 30;
+const LINK_CAPTION_MAX_LEN = 30;
+
 type FacebookFormGroup = {
   pageName: string;
   adType: string;
@@ -37,7 +54,14 @@ const Facebook: React.FC = () => {
   // todo: determine Select onChange event type
   const handleFormChange = (e: ChangeEvent<HTMLInputElement> | any) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+
+    if(['socialLikes', 'socialComments', 'socialShares'].includes(name)) {
+      // slice leading zero on numeric inputs
+      const sliceLeading = value.length > 1 && value[0] === '0' ? value.slice(1) : value;
+      setForm({ ...form, [name]: sliceLeading });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleButtonGroupChange = (_: any, value: Array<string>) => {
@@ -45,6 +69,7 @@ const Facebook: React.FC = () => {
   };
 
   const handleNumericOnKeyPress = (e: KeyboardEvent) => {
+    // prevent non-numeric
     if(!/[0-9]/.test(e.key)) {
       e.preventDefault();
     }
@@ -85,9 +110,9 @@ const Facebook: React.FC = () => {
               <h4>{t('FACEBOOK_POST_INFO_HEADER')}</h4>
 
               <TextField name="pageName" label={t('FACEBOOK_FIELD_PAGE_NAME_TEXT')} className="full-width"
-                         value={form.pageName} onChange={handleFormChange}/>
+                         value={form.pageName} onChange={handleFormChange} helperText={`${form.pageName.length}/${PAGE_NAME_MAX_LEN}`}/>
               <TextField name="postMessage" label={t('FACEBOOK_FIELD_POST_MSG_TEXT')} className="full-width"
-                         value={form.postMessage} onChange={handleFormChange}/>
+                         value={form.postMessage} onChange={handleFormChange} multiline/>
             </Box>
 
             <Box className="facebook-form-container">
@@ -95,11 +120,11 @@ const Facebook: React.FC = () => {
 
               <div className="facebook__text">{t('FACEBOOK_LINK_INFO_TEXT')}</div>
               <TextField name="linkUrl" label={t('FACEBOOK_FIELD_LINK_URL_TEXT')} className="full-width"
-                         value={form.linkUrl} onChange={handleFormChange}/>
+                         value={form.linkUrl} onChange={handleFormChange} helperText={`${form.linkUrl.length}/${LINK_URL_MAX_LEN}`}/>
               <TextField name="linkDescription" label={t('FACEBOOK_FIELD_LINK_DESC_TEXT')} className="full-width"
-                         value={form.linkDescription} onChange={handleFormChange}/>
+                         value={form.linkDescription} onChange={handleFormChange} helperText={`${form.linkDescription.length}/${LINK_DESC_MAX_LEN}`}/>
               <TextField name="linkCaption" label={t('FACEBOOK_FIELD_LINK_CAPTION_TEXT')} className="full-width"
-                         value={form.linkCaption} onChange={handleFormChange}/>
+                         value={form.linkCaption} onChange={handleFormChange} helperText={`${form.linkCaption.length}/${LINK_CAPTION_MAX_LEN}`}/>
             </Box>
 
             <Box className="facebook-form-container">

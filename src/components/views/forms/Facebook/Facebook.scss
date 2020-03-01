@@ -1,3 +1,4 @@
+@import 'src/styles/abstract/colors';
 @import 'src/styles/abstract/mixins';
 @import 'src/styles/vendor/facebook-icons';
 
@@ -31,7 +32,7 @@
     }
 
     .material-icons {
-      margin-right: 8px;
+      margin: 0 8px;
 
       @media(max-width: 1060px) {
         margin-right: 0;

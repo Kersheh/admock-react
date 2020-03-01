@@ -3,6 +3,13 @@
 }
 
 .MuiMenuItem-root {
+  &.MuiListItem-root {
+    @media(max-width: 1060px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .material-icons {
     margin-right: 8px;
   }

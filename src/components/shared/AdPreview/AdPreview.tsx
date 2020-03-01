@@ -15,7 +15,7 @@ const AdPreview: React.FC<AdPreviewProps> = ({ children }: AdPreviewProps) => {
     <div className="ad-preview">
       <div className="ad-preview-container">
         <h1 className="alt ad-preview__header">{t('AD_RENDER_PANEL_TITLE')}</h1>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" justifyContent="center">
           {children}
         </Box>
       </div>
