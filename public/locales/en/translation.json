@@ -35,6 +35,7 @@
   "AD_RENDER_PANEL_TITLE": "Preview",
 
   "FACEBOOK_POST_INFO_HEADER": "Ad Post Information",
+  "FACEBOOK_POST_INFO_TEXT": "Provide a page name and post message for the ad's post.",
   "FACEBOOK_LINK_INFO_HEADER": "Link Info",
   "FACEBOOK_LINK_INFO_TEXT": "Provide a header, description, and caption for the ad's link.",
   "FACEBOOK_FIELD_PAGE_NAME_TEXT": "Page Name",

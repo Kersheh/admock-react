@@ -80,14 +80,13 @@ const FacebookPreview: React.FC = () => {
           {previewProps.postMessage}
         </div>
 
-        <div className="facebook-preview-image-container">
+        <Box className="facebook-preview-image-container" display="flex" flex="1"
+             justifyContent="center" alignItems="center">
           {
             !previewProps.adImage &&
-              <Box display="flex" flex="1" justifyContent="center" alignItems="center">
-                <Icon className="facebook__placeholder-icon">photo_camera</Icon>
-              </Box>
+              <Icon className="facebook-preview__placeholder-icon">photo_camera</Icon>
           }
-        </div>
+        </Box>
 
         <a href={previewProps.linkUrl ? '//' + previewProps.linkUrl : ''}
            target="_blank" rel="noreferrer noopener">

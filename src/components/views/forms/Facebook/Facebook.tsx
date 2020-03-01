@@ -17,6 +17,10 @@ export const FACEBOOK_CALL_TO_ACTION_OPTS = [
   { value: 'watch', translate: 'FACEBOOK_CTA_BTN_WATCH_MORE' }
 ];
 
+const FACEBOOK_REACTION_TYPES = [
+  'like', 'wow', 'angry', 'laugh', 'sad', 'love'
+];
+
 const PAGE_NAME_MAX_LEN = 75;
 const PAGE_MESSAGE_MAX_LEN = 300;
 const LINK_URL_MAX_LEN = 30;
@@ -31,6 +35,7 @@ type FacebookFormGroup = {
   linkUrl: string;
   linkDescription: string;
   linkCaption: string;
+  ctaButton: string;
   socialReactions: Array<string>;
   socialLikes: number;
   socialComments: number;
@@ -47,6 +52,7 @@ const Facebook: React.FC = () => {
     linkUrl: '',
     linkDescription: '',
     linkCaption: '',
+    ctaButton: '',
     socialReactions: [],
     socialLikes: 0,
     socialComments: 0,
@@ -112,6 +118,8 @@ const Facebook: React.FC = () => {
             <Box className="facebook-form-container">
               <h4>{t('FACEBOOK_POST_INFO_HEADER')}</h4>
 
+              <div className="facebook__text">{t('FACEBOOK_POST_INFO_TEXT')}</div>
+
               <TextField name="pageName" label={t('FACEBOOK_FIELD_PAGE_NAME_TEXT')}
                          value={form.pageName} onChange={handleFormChange} className="full-width"
                          helperText={`${form.pageName.length}/${PAGE_NAME_MAX_LEN}`}/>
@@ -125,6 +133,7 @@ const Facebook: React.FC = () => {
               <h4>{t('FACEBOOK_LINK_INFO_HEADER')}</h4>
 
               <div className="facebook__text">{t('FACEBOOK_LINK_INFO_TEXT')}</div>
+
               <TextField name="linkUrl" label={t('FACEBOOK_FIELD_LINK_URL_TEXT')}
                          value={form.linkUrl} onChange={handleFormChange} className="full-width"
                          helperText={`${form.linkUrl.length}/${LINK_URL_MAX_LEN}`}/>
@@ -142,24 +151,15 @@ const Facebook: React.FC = () => {
               <ToggleButtonGroup className="facebook__btn-group"
                                  value={form.socialReactions}
                                  onChange={handleButtonGroupChange}>
-                <ToggleButton value="like" className="facebook__icon">
-                  <span className="like"/>
-                </ToggleButton>
-                <ToggleButton value="wow" className="facebook__icon">
-                  <span className="wow"/>
-                </ToggleButton>
-                <ToggleButton value="angry" className="facebook__icon">
-                  <span className="angry"/>
-                </ToggleButton>
-                <ToggleButton value="laugh" className="facebook__icon">
-                  <span className="laugh"/>
-                </ToggleButton>
-                <ToggleButton value="sad" className="facebook__icon">
-                  <span className="sad"/>
-                </ToggleButton>
-                <ToggleButton value="love" className="facebook__icon">
-                  <span className="love"/>
-                </ToggleButton>
+                {
+                  FACEBOOK_REACTION_TYPES.map((reaction, key) => {
+                    return (
+                      <ToggleButton value={reaction} className="facebook__icon" key={key}>
+                        <span className={reaction}/>
+                      </ToggleButton>
+                    );
+                  })
+                }
               </ToggleButtonGroup>
 
               <Box display="flex" justifyContent="space-between">
