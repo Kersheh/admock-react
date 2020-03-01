@@ -1,5 +1,6 @@
 @import 'src/styles/abstract/colors';
 @import 'src/styles/abstract/mixins';
+@import 'src/styles/layout/views';
 
 @mixin collapse-width($width, $width-c: 0) {
   @include cubic-transition(width);
@@ -13,8 +14,7 @@
 }
 
 .sidebar {
-  @include collapse-width(200px, 55px);
-  height: 100%;
+  @include collapse-width($sidebar-width, 55px);
   background: $color-danube-blue;
   color: $color-white;
   border-right: 2px solid rgba($color-kilamanjaro-gray, .1);
@@ -109,6 +109,18 @@
           justify-content: flex-start;
           color: $color-white;
           border-radius: 0;
+        }
+
+        .MuiTouchRipple-root {
+          .MuiTouchRipple-ripplePulsate {
+            width: 100% !important; // sass-lint:disable-line no-important
+            left: 0 !important; // sass-lint:disable-line no-important
+
+            .MuiTouchRipple-child {
+              border-radius: 0;
+              animation: none;
+            }
+          }
         }
 
         &.active {

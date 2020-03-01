@@ -27,6 +27,20 @@ rules:
     - error
     - 2
     - SwitchCase: 1
+      ignoredNodes:
+      - JSXElement
+      - JSXElement > *
+      - JSXAttribute
+      - JSXIdentifier
+      - JSXNamespacedName
+      - JSXMemberExpression
+      - JSXSpreadAttribute
+      - JSXExpressionContainer
+      - JSXOpeningElement
+      - JSXClosingElement
+      - JSXText
+      - JSXEmptyExpression
+      - JSXSpreadChild
   linebreak-style:
     - error
     - unix

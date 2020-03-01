@@ -27,6 +27,15 @@
 //   }
 // };
 //
-// export { initialState, actionTypes, reducer };
 
-export default () => {};
+const initialState = () => {
+  console.log('TODO: initialState fn()');
+};
+const actionTypes = () => {
+  console.log('TODO: actionTypes fn()');
+};
+const reducer = () => {
+  console.log('TODO: reducer fn()');
+};
+
+export { initialState, actionTypes, reducer };

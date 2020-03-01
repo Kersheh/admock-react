@@ -11,4 +11,6 @@
 //   };
 // };
 
-export default () => {};
+export const useActions = () => {
+  console.log('TODO: useActions fn()');
+};

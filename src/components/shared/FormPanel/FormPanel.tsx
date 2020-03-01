@@ -2,7 +2,11 @@ import React, { ReactNode } from 'react';
 
 import './FormPanel.scss';
 
-const FormPanel: React.FC<ReactNode> = ({ children }) => {
+type AdPreviewProps = {
+  children?: ReactNode;
+}
+
+const FormPanel: React.FC<AdPreviewProps> = ({ children }: AdPreviewProps) => {
   return (
     <div className="form-panel">
       {children}

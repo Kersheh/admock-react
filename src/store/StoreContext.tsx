@@ -21,7 +21,12 @@
 //     </StoreContext.Provider>
 //   );
 // };
-//
-// export { StoreContext, StoreProvider };
 
-export default () => {};
+const StoreContext = () => {
+  console.log('TODO: StoreContext fn()');
+};
+const StoreProvider = () => {
+  console.log('TODO: StoreProvider fn()');
+};
+
+export { StoreContext, StoreProvider };

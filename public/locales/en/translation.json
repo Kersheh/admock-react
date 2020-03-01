@@ -28,6 +28,10 @@
   "MEDIA_TYPE_LINKEDIN": "LinkedIn",
   "MEDIA_TYPE_TIKTOK": "TikTok",
 
+  "AD_TYPE_IMAGE": "Image",
+  "AD_TYPE_VIDEO": "Video",
+  "AD_TYPE_CAROUSEL": "Carousel",
+
   "AD_RENDER_PANEL_TITLE": "Preview",
 
   "FACEBOOK_POST_INFO_HEADER": "Ad Post Information",

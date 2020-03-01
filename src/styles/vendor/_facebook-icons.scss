@@ -1,0 +1,38 @@
+@mixin reaction-emojis {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('/assets/facebook/sprite-map-reactions.png');
+  background-size: 97px 1200px;
+  width: 18px;
+  height: 18px;
+}
+
+@mixin facebook-reaction-like {
+  @include reaction-emojis;
+  background-position: -49px -1037px;
+}
+
+@mixin facebook-reaction-wow {
+  @include reaction-emojis;
+  background-position: -49px -1075px;
+}
+
+@mixin facebook-reaction-angry {
+  @include reaction-emojis;
+  background-position: -70px -997px;
+}
+
+@mixin facebook-reaction-laugh {
+  @include reaction-emojis;
+  background-position: -68px -1018px;
+}
+
+@mixin facebook-reaction-sad {
+  @include reaction-emojis;
+  background-position: -49px -1056px;
+}
+
+@mixin facebook-reaction-love {
+  @include reaction-emojis;
+  background-position: -68px -1037px;
+}

@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, ReactNode } from 'react';
+import { Box } from '@material-ui/core';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -79,16 +80,22 @@ const routerViews = [
   },
 ];
 
-const routerViewComponents = routerViews.map((route, key) => {
+const routerViewComponents: Array<ReactNode> = routerViews.map((route, key) => {
   return (
     <Route exact path={route.path} key={key}>
-      <FormPanel>
-        {route.view}
-      </FormPanel>
+      <Box className="app-route" display="flex" flex="1">
+        <Box className="app-route__form-panel" flex="40">
+          <FormPanel>
+            {route.view}
+          </FormPanel>
+        </Box>
 
-      <AdPreview>
-        {route.preview}
-      </AdPreview>
+        <Box className="app-route__ad-preview" flex="60">
+          <AdPreview>
+            {route.preview}
+          </AdPreview>
+        </Box>
+      </Box>
     </Route>
   );
 });
@@ -97,7 +104,7 @@ const App: React.FC = () => {
   const history = createBrowserHistory();
 
   return (
-    <div className="app">
+    <Box className="app" display="flex" alignItems="stretch">
       <Suspense fallback={<Spinner size={128}/>}>
         <BrowserTitle history={history}/>
 
@@ -113,7 +120,7 @@ const App: React.FC = () => {
           <Footer/>
         </Router>
       </Suspense>
-    </div>
+    </Box>
   );
 };
 

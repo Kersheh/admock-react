@@ -1,11 +1,24 @@
 import React, { ReactNode } from 'react';
+import { Box } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import './AdPreview.scss';
 
-const AdPreview: React.FC<ReactNode> = ({ children }) => {
+type AdPreviewProps = {
+  children?: ReactNode;
+}
+
+const AdPreview: React.FC<AdPreviewProps> = ({ children }: AdPreviewProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="ad-preview">
-      {children}
+      <div className="ad-preview-container">
+        <h1 className="alt ad-preview__header">{t('AD_RENDER_PANEL_TITLE')}</h1>
+        <Box display="flex" alignItems="center">
+          {children}
+        </Box>
+      </div>
     </div>
   );
 };

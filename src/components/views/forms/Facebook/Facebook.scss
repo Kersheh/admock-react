@@ -1,3 +1,102 @@
-.facebook {
+@import 'src/styles/abstract/mixins';
+@import 'src/styles/vendor/facebook-icons';
 
+.facebook {
+  width: 100%;
+  height: 100%;
+
+  &-container {
+    @include view-layout;
+  }
+
+  &-form-container {
+    &:not(:last-of-type) {
+      margin-bottom: 28px;
+    }
+  }
+
+  &__header {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -1px;
+  }
+
+  &__type {
+    width: 35%;
+
+    .MuiBox-root {
+      @media(max-width: 1060px) {
+        justify-content: center;
+      }
+    }
+
+    .material-icons {
+      margin-right: 8px;
+
+      @media(max-width: 1060px) {
+        margin-right: 0;
+      }
+    }
+
+    &-text {
+      font-size: 14px;
+
+      @media(max-width: 1060px) {
+        display: none;
+      }
+    }
+  }
+
+  &__text {
+    margin: 12px 0 6px;
+  }
+
+  &__textarea {
+    width: 100%;
+  }
+
+  &__upload {
+    margin-top: 12px;
+  }
+
+  &-tab-group {
+    min-width: 300px;
+  }
+
+  &-ad-render-panel {
+    min-width: 548px;
+  }
+
+  &__btn-group {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  &__icon {
+    flex: 1;
+
+    .like {
+      @include facebook-reaction-like;
+    }
+
+    .wow {
+      @include facebook-reaction-wow;
+    }
+
+    .angry {
+      @include facebook-reaction-angry;
+    }
+
+    .laugh {
+      @include facebook-reaction-laugh;
+    }
+
+    .sad {
+      @include facebook-reaction-sad;
+    }
+
+    .love {
+      @include facebook-reaction-love;
+    }
+  }
 }

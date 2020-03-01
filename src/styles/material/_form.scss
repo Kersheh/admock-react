@@ -1,0 +1,27 @@
+@import 'src/styles/abstract/colors';
+
+.MuiFormControl-root {
+  &.MuiTextField-root {
+    margin: 2px 0;
+  }
+
+  .MuiFormLabel-root.Mui-focused, {
+    color: $color-danube-blue;
+  }
+}
+
+.MuiInput-root {
+  &.MuiInput-underline {
+    &::after {
+      border-bottom: 2px solid $color-danube-blue;
+    }
+
+    &:hover {
+      &:not(.Mui-disabled) {
+        &::before {
+          border-bottom: 2px solid $color-danube-blue;
+        }
+      }
+    }
+  }
+}

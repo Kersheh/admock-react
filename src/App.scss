@@ -1,8 +1,22 @@
 @import 'src/styles/abstract/colors';
+@import 'src/styles/abstract/mixins';
+@import 'src/styles/layout/views';
 
 .app {
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: flex-start;
+
+  &-route {
+    overflow-x: scroll;
+
+    &__form-panel {
+      min-width: $form-panel-width;
+      overflow-y: scroll;
+    }
+
+    &__ad-preview {
+      min-width: $ad-preview-width;
+      overflow-y: scroll;
+    }
+  }
 }
