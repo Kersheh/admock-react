@@ -100,12 +100,19 @@ const routerViewComponents: Array<ReactNode> = routerViews.map((route, key) => {
   );
 });
 
+// windows only component for unique scrollbar styling
+let Windows: React.FC;
+if(navigator.appVersion.includes('Windows')) {
+  Windows = React.lazy(() => import('src/Windows'));
+}
+
 const App: React.FC = () => {
   const history = createBrowserHistory();
 
   return (
     <Box className="app" display="flex" alignItems="stretch">
       <Suspense fallback={<Spinner size={128}/>}>
+        {Windows && <Windows/>}
         <BrowserTitle history={history}/>
 
         <Router history={history}>

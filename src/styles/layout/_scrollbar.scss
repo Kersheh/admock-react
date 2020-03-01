@@ -1,31 +1,12 @@
 @import 'src/styles/abstract/colors';
 
-// Customize scrollbar like macOS for Windows; not supported in Firefox and IE
+// Customize scrollbar similar to macOS for Windows
 ::-webkit-scrollbar { // sass-lint:disable-line no-vendor-prefixes
-  background-color: $color-white;
-  width: 16px;
-}
-
-::-webkit-scrollbar-track { // sass-lint:disable-line no-vendor-prefixes
-  background-color: $color-white;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb { // sass-lint:disable-line no-vendor-prefixes
   background-color: $color-french-gray;
   border-radius: 16px;
-  border: 4px solid $color-white;
-}
-
-::-webkit-scrollbar-button { // sass-lint:disable-line no-vendor-prefixes
-  display: none;
-}
-
-::-webkit-scrollbar-track-piece { // sass-lint:disable-line no-vendor-prefixes
-  &:start {
-    background: transparent url('/assets/misc/scrollbar.png') repeat-y !important; // sass-lint:disable-line no-important
-  }
-
-  &:end {
-    background: transparent url('/assets/misc/scrollbar.png') repeat-y !important; // sass-lint:disable-line no-important
-  }
 }

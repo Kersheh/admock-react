@@ -2,9 +2,8 @@
 @import 'src/styles/abstract/mixins';
 
 .ad-preview {
-  background-color: $color-kilamanjaro-gray;
   color: $color-white;
-  height: 100%;
+  height: fit-content;
   border-left: 2px solid rgba($color-white, .2);
 
   &-container {

@@ -7,7 +7,7 @@
   width: 100%;
 
   &-route {
-    overflow-x: scroll;
+    overflow-x: auto;
 
     &__form-panel {
       min-width: $form-panel-width;
@@ -15,6 +15,7 @@
     }
 
     &__ad-preview {
+      background-color: $color-kilamanjaro-gray;
       min-width: $ad-preview-width;
       overflow-y: scroll;
     }
