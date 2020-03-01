@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { Box, TextField, Select, MenuItem, Icon } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { useTranslation } from 'react-i18next';
@@ -17,10 +17,12 @@ export const FACEBOOK_CALL_TO_ACTION_OPTS = [
   { value: 'watch', translate: 'FACEBOOK_CTA_BTN_WATCH_MORE' }
 ];
 
-const PAGE_NAME_MAX_LEN = 30;
+const PAGE_NAME_MAX_LEN = 75;
+const PAGE_MESSAGE_MAX_LEN = 300;
 const LINK_URL_MAX_LEN = 30;
-const LINK_DESC_MAX_LEN = 30;
+const LINK_DESC_MAX_LEN = 25;
 const LINK_CAPTION_MAX_LEN = 30;
+const SOCIAL_COUNT_MAX_LEN = 9;
 
 type FacebookFormGroup = {
   pageName: string;
@@ -51,14 +53,13 @@ const Facebook: React.FC = () => {
     socialShares: 0
   } as FacebookFormGroup);
 
-  // todo: determine Select onChange event type
-  const handleFormChange = (e: ChangeEvent<HTMLInputElement> | any) => {
+  const handleFormChange = (e: any) => {
     const { name, value } = e.target;
 
     if(['socialLikes', 'socialComments', 'socialShares'].includes(name)) {
-      // slice leading zero on numeric inputs
+      // slice leading zero on numeric inputs and prevent excess character length
       const sliceLeading = value.length > 1 && value[0] === '0' ? value.slice(1) : value;
-      setForm({ ...form, [name]: sliceLeading });
+      setForm({ ...form, [name]: sliceLeading.substring(0, SOCIAL_COUNT_MAX_LEN) });
     } else {
       setForm({ ...form, [name]: value });
     }
@@ -68,9 +69,11 @@ const Facebook: React.FC = () => {
     setForm({ ...form, socialReactions: value });
   };
 
-  const handleNumericOnKeyPress = (e: KeyboardEvent) => {
-    // prevent non-numeric
-    if(!/[0-9]/.test(e.key)) {
+  const handleNumericOnKeyPress = (e: any) => {
+    const name: keyof FacebookFormGroup = e.target.name;
+
+    // prevent non-numeric input and exceeding character length
+    if(!/[0-9]/.test(e.key) || form[name].toString().length >= SOCIAL_COUNT_MAX_LEN) {
       e.preventDefault();
     }
   };
@@ -109,22 +112,28 @@ const Facebook: React.FC = () => {
             <Box className="facebook-form-container">
               <h4>{t('FACEBOOK_POST_INFO_HEADER')}</h4>
 
-              <TextField name="pageName" label={t('FACEBOOK_FIELD_PAGE_NAME_TEXT')} className="full-width"
-                         value={form.pageName} onChange={handleFormChange} helperText={`${form.pageName.length}/${PAGE_NAME_MAX_LEN}`}/>
-              <TextField name="postMessage" label={t('FACEBOOK_FIELD_POST_MSG_TEXT')} className="full-width"
-                         value={form.postMessage} onChange={handleFormChange} multiline/>
+              <TextField name="pageName" label={t('FACEBOOK_FIELD_PAGE_NAME_TEXT')}
+                         value={form.pageName} onChange={handleFormChange} className="full-width"
+                         helperText={`${form.pageName.length}/${PAGE_NAME_MAX_LEN}`}/>
+              <TextField name="postMessage" label={t('FACEBOOK_FIELD_POST_MSG_TEXT')}
+                         value={form.postMessage} onChange={handleFormChange} className="full-width"
+                         helperText={`${form.postMessage.length}/${PAGE_MESSAGE_MAX_LEN}`}
+                         multiline/>
             </Box>
 
             <Box className="facebook-form-container">
               <h4>{t('FACEBOOK_LINK_INFO_HEADER')}</h4>
 
               <div className="facebook__text">{t('FACEBOOK_LINK_INFO_TEXT')}</div>
-              <TextField name="linkUrl" label={t('FACEBOOK_FIELD_LINK_URL_TEXT')} className="full-width"
-                         value={form.linkUrl} onChange={handleFormChange} helperText={`${form.linkUrl.length}/${LINK_URL_MAX_LEN}`}/>
-              <TextField name="linkDescription" label={t('FACEBOOK_FIELD_LINK_DESC_TEXT')} className="full-width"
-                         value={form.linkDescription} onChange={handleFormChange} helperText={`${form.linkDescription.length}/${LINK_DESC_MAX_LEN}`}/>
-              <TextField name="linkCaption" label={t('FACEBOOK_FIELD_LINK_CAPTION_TEXT')} className="full-width"
-                         value={form.linkCaption} onChange={handleFormChange} helperText={`${form.linkCaption.length}/${LINK_CAPTION_MAX_LEN}`}/>
+              <TextField name="linkUrl" label={t('FACEBOOK_FIELD_LINK_URL_TEXT')}
+                         value={form.linkUrl} onChange={handleFormChange} className="full-width"
+                         helperText={`${form.linkUrl.length}/${LINK_URL_MAX_LEN}`}/>
+              <TextField name="linkDescription" label={t('FACEBOOK_FIELD_LINK_DESC_TEXT')}
+                         value={form.linkDescription} onChange={handleFormChange} className="full-width"
+                         helperText={`${form.linkDescription.length}/${LINK_DESC_MAX_LEN}`}/>
+              <TextField name="linkCaption" label={t('FACEBOOK_FIELD_LINK_CAPTION_TEXT')}
+                         value={form.linkCaption} onChange={handleFormChange} className="full-width"
+                         helperText={`${form.linkCaption.length}/${LINK_CAPTION_MAX_LEN}`}/>
             </Box>
 
             <Box className="facebook-form-container">
@@ -155,19 +164,19 @@ const Facebook: React.FC = () => {
 
               <Box display="flex" justifyContent="space-between">
                 <Box flex="0 0 32%">
-                  <TextField name="socialLikes" label={t('FACEBOOK_SOCIAL_LIKES_TEXT')} className="full-width"
-                             value={form.socialLikes} onKeyPress={handleNumericOnKeyPress}
-                             onChange={handleFormChange}/>
+                  <TextField name="socialLikes" label={t('FACEBOOK_SOCIAL_LIKES_TEXT')}
+                             value={form.socialLikes} className="full-width"
+                             onChange={handleFormChange} onKeyPress={handleNumericOnKeyPress}/>
                 </Box>
                 <Box flex="0 0 32%">
-                  <TextField name="socialComments" label={t('FACEBOOK_SOCIAL_COMMENTS_TEXT')} className="full-width"
-                             value={form.socialComments} onKeyPress={handleNumericOnKeyPress}
-                             onChange={handleFormChange}/>
+                  <TextField name="socialComments" label={t('FACEBOOK_SOCIAL_COMMENTS_TEXT')}
+                             value={form.socialComments} className="full-width"
+                             onChange={handleFormChange} onKeyPress={handleNumericOnKeyPress}/>
                 </Box>
                 <Box flex="0 0 32%">
-                  <TextField name="socialShares" label={t('FACEBOOK_SOCIAL_SHARES_TEXT')} className="full-width"
-                             value={form.socialShares}  onKeyPress={handleNumericOnKeyPress}
-                             onChange={handleFormChange}/>
+                  <TextField name="socialShares" label={t('FACEBOOK_SOCIAL_SHARES_TEXT')}
+                             value={form.socialShares} className="full-width"
+                             onChange={handleFormChange} onKeyPress={handleNumericOnKeyPress}/>
                 </Box>
               </Box>
             </Box>
