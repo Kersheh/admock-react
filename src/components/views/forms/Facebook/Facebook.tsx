@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import './Facebook.scss';
 
 export const FACEBOOK_CALL_TO_ACTION_OPTS = [
+  { value: 'none', translate: 'FACEBOOK_CTA_BTN_NONE' },
   { value: 'apply', translate: 'FACEBOOK_CTA_BTN_APPLY_NOW' },
   { value: 'book', translate: 'FACEBOOK_CTA_BTN_BOOK_NOW' },
   { value: 'contact', translate: 'FACEBOOK_CTA_BTN_CONTACT_US' },
@@ -15,7 +16,7 @@ export const FACEBOOK_CALL_TO_ACTION_OPTS = [
   { value: 'shop', translate: 'FACEBOOK_CTA_BTN_SHOP_NOW' },
   { value: 'signup', translate: 'FACEBOOK_CTA_BTN_SIGN_UP' },
   { value: 'watch', translate: 'FACEBOOK_CTA_BTN_WATCH_MORE' }
-];
+] as Array<{ value: string, translate: string }>;
 
 const FACEBOOK_REACTION_TYPES = [
   'like', 'wow', 'angry', 'laugh', 'sad', 'love'
@@ -52,7 +53,7 @@ const Facebook: React.FC = () => {
     linkUrl: '',
     linkDescription: '',
     linkCaption: '',
-    ctaButton: '',
+    ctaButton: 'none',
     socialReactions: [],
     socialLikes: 0,
     socialComments: 0,
@@ -82,6 +83,14 @@ const Facebook: React.FC = () => {
     if(!/[0-9]/.test(e.key) || form[name].toString().length >= SOCIAL_COUNT_MAX_LEN) {
       e.preventDefault();
     }
+  };
+
+  const renderCtaButtonValue = (val: string | unknown) => {
+    return (
+      val === 'none' ?
+        <span className="facebook__cta-btn-empty">{t('FACEBOOK_FIELD_CTA_TEXT')}</span> :
+        <span>{t(FACEBOOK_CALL_TO_ACTION_OPTS.find(ctaOpt => ctaOpt.value === val)?.translate || '')}</span>
+    );
   };
 
   return (
@@ -143,6 +152,20 @@ const Facebook: React.FC = () => {
               <TextField name="linkCaption" label={t('FACEBOOK_FIELD_LINK_CAPTION_TEXT')}
                          value={form.linkCaption} onChange={handleFormChange} className="full-width"
                          helperText={`${form.linkCaption.length}/${LINK_CAPTION_MAX_LEN}`}/>
+
+              <Select className="facebook__cta-btn" name="ctaButton"
+                      value={form.ctaButton} onChange={handleFormChange}
+                      renderValue={renderCtaButtonValue}>
+                {
+                  FACEBOOK_CALL_TO_ACTION_OPTS.map((ctaButton, key) => {
+                    return (
+                      <MenuItem value={ctaButton.value} key={key}>
+                        <span className="facebook-preview__type-text">{t(ctaButton.translate)}</span>
+                      </MenuItem>
+                    );
+                  })
+                }
+              </Select>
             </Box>
 
             <Box className="facebook-form-container">

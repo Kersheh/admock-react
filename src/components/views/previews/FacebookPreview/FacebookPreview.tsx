@@ -34,7 +34,7 @@ const FacebookPreview: React.FC = () => {
   const [previewProps] = useState({
     pageName: t('FACEBOOK_PREVIEW_DEFAULT_PAGE_NAME'),
     postMessage: t('FACEBOOK_PREVIEW_DEFAULT_POST_MESSAGE'),
-    ctaButton: 'donate',
+    ctaButton: 'contact',
     linkUrl: t('FACEBOOK_PREVIEW_DEFAULT_LINK_URL'),
     linkDesc: t('FACEBOOK_PREVIEW_DEFAULT_LINK_DESC'),
     linkCaption: t('FACEBOOK_PREVIEW_DEFAULT_LINK_CAPTION'),
@@ -66,7 +66,10 @@ const FacebookPreview: React.FC = () => {
             <Box display="flex" flexDirection="column">
               <div className="facebook-preview-header__page-name">{previewProps.pageName}</div>
               <Box display="flex" flexDirection="row" justifyContent="start" alignItems="center" className="facebook-preview-header__sponsored">
-                <span className="facebook-preview-header__sponsored-link">{t('FACEBOOK_PREVIEW_SPONSORED')}</span>
+                <a href="https://www.facebook.com/ads/about" className="facebook-preview-header__sponsored-link"
+                   target="_blank" rel="noreferrer noopener">
+                  {t('FACEBOOK_PREVIEW_SPONSORED')}
+                </a>
                 <span>&nbsp;·&nbsp;</span>
                 <span className="facebook-preview-header__earth-icon"></span>
               </Box>

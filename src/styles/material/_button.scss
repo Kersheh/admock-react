@@ -1,6 +1,11 @@
 .MuiToggleButtonGroup-root {
   .MuiToggleButton-root {
     border-radius: 0;
+    min-width: 44px;
+  }
+
+  .MuiToggleButtonGroup-grouped {
+    padding: 0 9px;
   }
 }
 

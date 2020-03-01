@@ -60,12 +60,12 @@
     margin-top: 12px;
   }
 
-  &-tab-group {
-    min-width: 300px;
-  }
+  &__cta-btn {
+    width: 50%;
 
-  &-ad-render-panel {
-    min-width: 548px;
+    &-empty {
+      color: rgba($color-black, .54);
+    }
   }
 
   &__btn-group {
