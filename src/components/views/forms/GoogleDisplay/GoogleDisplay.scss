@@ -1,3 +1,5 @@
-.google-display {
+@import 'src/styles/layout/forms';
 
+.google-display {
+  @include form-layout;
 }

@@ -1,6 +1,9 @@
 import { Reducer, ReducerState } from 'react';
 // import logger, { LogLevel } from '../helpers/logger';
 
+// TODO: Split up single reducer into multiple individual reducers/contexts per
+// corresponding form panel view <--> ad panel view
+
 const initialState: ReducerState<any> = {
   facebookPreviewProps: {
     pageName: '',

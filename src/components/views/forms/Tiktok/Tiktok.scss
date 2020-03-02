@@ -1,3 +1,5 @@
-.tiktok {
+@import 'src/styles/layout/forms';
 
+.tiktok {
+  @include form-layout;
 }

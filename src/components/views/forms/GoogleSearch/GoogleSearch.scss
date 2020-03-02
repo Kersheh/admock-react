@@ -1,3 +1,5 @@
-.google-search {
+@import 'src/styles/layout/forms';
 
+.google-search {
+  @include form-layout;
 }

@@ -1,3 +1,5 @@
-.instagram {
+@import 'src/styles/layout/forms';
 
+.instagram {
+  @include form-layout;
 }

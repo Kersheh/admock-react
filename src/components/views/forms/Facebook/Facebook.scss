@@ -1,25 +1,15 @@
 @import 'src/styles/abstract/colors';
 @import 'src/styles/abstract/mixins';
+@import 'src/styles/layout/forms';
 @import 'src/styles/vendor/facebook-icons';
 
 .facebook {
-  width: 100%;
-  height: 100%;
-
-  &-container {
-    @include view-layout;
-  }
+  @include form-layout;
 
   &-form-container {
     &:not(:last-of-type) {
       margin-bottom: 28px;
     }
-  }
-
-  &__header {
-    font-size: 32px;
-    font-weight: 400;
-    letter-spacing: -1px;
   }
 
   &__type {

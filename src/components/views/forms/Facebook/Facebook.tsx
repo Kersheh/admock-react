@@ -54,7 +54,6 @@ const Facebook: React.FC = () => {
     adImage
   } = state.facebookPreviewProps;
 
-
   return useMemo(() => {
     // handle form onChange for TextField and Select updates
     const handleFormChange = (e: any) => {
@@ -106,8 +105,8 @@ const Facebook: React.FC = () => {
     return (
       <div className="facebook">
         <div className="facebook-container">
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <div className="facebook__header">{t('VIEW_TITLE_FACEBOOK')}</div>
+          <Box className="facebook__header" display="flex" justifyContent="space-between" alignItems="center">
+            <div className="facebook__header-text">{t('VIEW_TITLE_FACEBOOK')}</div>
 
             <Select className="facebook__type" name="adType"
                     value={adType} onChange={handleFormChange}>
@@ -180,6 +179,8 @@ const Facebook: React.FC = () => {
 
               <Box className="facebook-form-container">
                 <h4>{t('FACEBOOK_SOCIAL_HEADER')}</h4>
+
+                <div className="facebook__text">{t('FACEBOOK_SOCIAL_TEXT')}</div>
 
                 <ToggleButtonGroup className="facebook__btn-group"
                                    value={socialReactions}

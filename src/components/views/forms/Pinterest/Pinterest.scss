@@ -1,3 +1,5 @@
-.pinterest {
+@import 'src/styles/layout/forms';
 
+.pinterest {
+  @include form-layout;
 }

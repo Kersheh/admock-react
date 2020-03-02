@@ -1,3 +1,5 @@
-.linkedin {
+@import 'src/styles/layout/forms';
 
+.linkedin {
+  @include form-layout;
 }

@@ -1,3 +1,5 @@
-.snapchat {
+@import 'src/styles/layout/forms';
 
+.snapchat {
+  @include form-layout;
 }

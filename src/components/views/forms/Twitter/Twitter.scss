@@ -1,3 +1,5 @@
-.twitter {
+@import 'src/styles/layout/forms';
 
+.twitter {
+  @include form-layout;
 }

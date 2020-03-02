@@ -34,10 +34,10 @@
 
   "AD_RENDER_PANEL_TITLE": "Preview",
 
-  "FACEBOOK_POST_INFO_HEADER": "Ad Post Information",
+  "FACEBOOK_POST_INFO_HEADER": "Post Information",
   "FACEBOOK_POST_INFO_TEXT": "Provide a page name and post message for the ad's post.",
   "FACEBOOK_LINK_INFO_HEADER": "Link Info",
-  "FACEBOOK_LINK_INFO_TEXT": "Provide a header, description, and caption for the ad's link.",
+  "FACEBOOK_LINK_INFO_TEXT": "Provide a header, description, and caption for the ad's link. Optionally provide a Call-to-Action button.",
   "FACEBOOK_FIELD_PAGE_NAME_TEXT": "Page Name",
   "FACEBOOK_FIELD_POST_MSG_TEXT": "Post Message",
   "FACEBOOK_FIELD_CTA_TEXT": "Button Text",
@@ -45,6 +45,7 @@
   "FACEBOOK_FIELD_LINK_DESC_TEXT": "Link Description",
   "FACEBOOK_FIELD_LINK_CAPTION_TEXT": "Link Caption",
   "FACEBOOK_SOCIAL_HEADER": "Social Counts",
+  "FACEBOOK_SOCIAL_TEXT": "Optionally provide social reactions, comments, and shares.",
   "FACEBOOK_SOCIAL_LIKES_TEXT": "Likes",
   "FACEBOOK_SOCIAL_COMMENTS_TEXT": "Comments",
   "FACEBOOK_SOCIAL_SHARES_TEXT": "Shares",
