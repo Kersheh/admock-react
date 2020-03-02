@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { History, Location } from 'history';
 import { useTranslation } from 'react-i18next';
 
@@ -17,7 +17,7 @@ const BrowserTitle: React.FC<BrowserTitleProps> = ({ history }: BrowserTitleProp
     setRoutePath(location.pathname);
   });
 
-  useMemo(() => {
+  useEffect(() => {
     document.title = routePath ?
       `${t('APP_TITLE')} — ${t(MEDIA_TYPE_TRANSLATIONS[routePath.slice(1)])}` :
       t('APP_TITLE');
